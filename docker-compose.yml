@@ -1,0 +1,20 @@
+version: "3.6"
+services:
+  torrserver:
+    build:
+      context: ./
+    image: resetsa/torrserver:0.1
+    container_name: torrserver
+    networks:
+      external_net:
+        ipv4_address: 192.168.40.121
+    volumes:
+      - type: bind
+        source: ./db
+        target: /opt/torrserver/db
+    restart: unless-stopped
+
+networks:
+  external_net:
+    external:
+      name: SERVERS-DOCKER
